@@ -1,28 +1,38 @@
 <h3>Cart</h3>
 <p>
-  <a routerLink="/shipping">Shipping Prices</a>
+	<a routerLink="/shipping">Shipping Prices</a>
 </p>
 
 <div class="cart-item" *ngFor="let item of items">
-  <span>{{ item.name }}</span>
-  <span>{{ item.price | currency }}</span>
+	<span>{{ item.name }}</span>
+	<span>{{ item.price | currency }}</span>
 </div>
-<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-  <div>
-    <label for="name">
-      Name
+	<div>
+		<label for="name">
+      Usuario
     </label>
-    <input id="name" type="text" formControlName="name">
+		<input id="name" type="text" formControlName="usuario">
   </div>
 
-  <div>
-    <label for="address">
-      Address
+		<div *ngIf="this.loginForm.controls.usuario.errors?.required">
+			El usuario es obligatorio
+			<p></p>
+		</div>
+
+		<div *ngIf="this.loginForm.controls.usuario.errors?.minlength">
+			La longitud min de 5
+			<p></p>
+		</div>
+
+		<div>
+			<label for="address">
+      Contraseña
     </label>
-    <input id="address" type="text" formControlName="address">
+			<input id="address" type="text" formControlName="password">
   </div>
 
-  <button class="button" type="submit">Purchase</button>
+			<button class="button" type="submit">Purchase</button>
 
 </form>
